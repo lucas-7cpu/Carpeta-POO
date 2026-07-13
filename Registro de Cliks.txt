@@ -1,0 +1,33 @@
+int maxPuntos = 10;
+float[] xpos = new float[maxPuntos];
+float[] ypos = new float[maxPuntos];
+int totalPuntos = 0;
+int indiceActual = 0;
+
+void setup() {
+  size(800, 600);
+  background(30);
+  noStroke();
+}
+
+void draw() {
+  background(30);
+  
+  int puntosADibujar = min(totalPuntos, maxPuntos);
+  
+  for (int i = 0; i < puntosADibujar; i++) {
+    if (i == (indiceActual - 1 + maxPuntos) % maxPuntos && totalPuntos > 0) {
+      fill(255, 100, 100);
+    } else {
+      fill(100, 150, 255);
+    }
+    ellipse(xpos[i], ypos[i], 30, 30);
+  }
+}
+
+void mousePressed() {
+  xpos[indiceActual] = mouseX;
+  ypos[indiceActual] = mouseY;
+  totalPuntos++;
+  indiceActual = (indiceActual + 1) % maxPuntos;
+}
